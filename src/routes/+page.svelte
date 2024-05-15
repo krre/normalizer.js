@@ -7,27 +7,26 @@
 	let error: string;
 
 	onMount(() => {
-		gpuInit();
+		gpuInit().catch((err) => (error = err));
 	});
 
 	async function gpuInit() {
-		if (!navigator.gpu) {
-			error = 'WebGPU not supported';
-			return;
+		const gpu = navigator.gpu;
+
+		if (!gpu) {
+			throw new Error('WebGPU not supported');
 		}
 
-		const adapter = await navigator.gpu.requestAdapter();
+		const adapter = await gpu.requestAdapter();
 
 		if (!adapter) {
-			error = "Couldn't request WebGPU adapter";
-			return;
+			throw new Error("Couldn't request WebGPU adapter");
 		}
 
 		device = await adapter.requestDevice();
 
 		if (!device) {
-			error = "Couldn't request WebGPU device";
-			return;
+			throw new Error("Couldn't request WebGPU device");
 		}
 	}
 </script>
@@ -35,7 +34,7 @@
 <h1>{title}</h1>
 
 {#if error}
-	<p>Error: {error}</p>
+	{error}
 {:else}
 	{device}
 {/if}
