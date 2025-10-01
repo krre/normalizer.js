@@ -1,2 +1,2 @@
 # Normalizer
-Web IDE for developing Norm projects.
+Web IDE for [Norm](https://github.com/krre/norm) programming language.
