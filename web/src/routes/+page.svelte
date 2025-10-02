@@ -1,14 +1,18 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import initSync from '$lib/wasm/normalizer.js';
+	import init from '$lib/wasm/normalizer.js';
 
 	const title = 'Normalizer';
 
 	let device: string;
 
 	onMount(() => {
-		initSync();
+		run();
 	});
+
+	async function run() {
+		await init();
+	}
 </script>
 
 <svelte:head>
