@@ -4,7 +4,7 @@ WASM_DIR=wasm
 all: wasm web
 
 wasm:
-	cd $(WASM_DIR) && wasm-pack build --target web --out-dir ../$(WEB_DIR)/src/wasm
+	cd $(WASM_DIR) && wasm-pack build --target web --out-dir ../$(WEB_DIR)/src/lib/wasm
 
 web:
 	cd $(WEB_DIR) && npm run dev
