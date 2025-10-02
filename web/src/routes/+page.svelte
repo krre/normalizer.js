@@ -1,34 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import initSync from '$lib/wasm/normalizer.js';
 
 	const title = 'Normalizer';
 
 	let device: string;
-	let error: string;
 
 	onMount(() => {
-		gpuInit().catch((err) => (error = err));
+		initSync();
 	});
-
-	async function gpuInit() {
-		const gpu = navigator.gpu;
-
-		if (!gpu) {
-			throw new Error('WebGPU not supported');
-		}
-
-		const adapter = await gpu.requestAdapter();
-
-		if (!adapter) {
-			throw new Error("Couldn't request WebGPU adapter");
-		}
-
-		device = await adapter.requestDevice();
-
-		if (!device) {
-			throw new Error("Couldn't request WebGPU device");
-		}
-	}
 </script>
 
 <svelte:head>
@@ -37,8 +17,4 @@
 
 <h1>{title}</h1>
 
-{#if error}
-	{error}
-{:else}
-	{device}
-{/if}
+<canvas id="webgpu-canvas"></canvas>
