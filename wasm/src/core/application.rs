@@ -10,7 +10,7 @@ impl Normalizer {
 
 impl Application for Normalizer {
     fn build_ui(&self) -> Ui3d {
-        Ui3d {}
+        Ui3d::new()
     }
 }
 
