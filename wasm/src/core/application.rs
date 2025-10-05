@@ -1,4 +1,7 @@
-use antiq::{Application, ui::Ui3d};
+use antiq::{
+    Application,
+    ui::{Color, Ui3d},
+};
 
 pub struct Normalizer {}
 
@@ -10,7 +13,9 @@ impl Normalizer {
 
 impl Application for Normalizer {
     fn build_ui(&self) -> Ui3d {
-        Ui3d::new()
+        let mut ui = Ui3d::new();
+        ui.set_backgroud_color(&Color::new(0.25, 0.23, 0.23));
+        ui
     }
 }
 
